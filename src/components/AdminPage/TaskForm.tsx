@@ -24,7 +24,6 @@ function TaskForm({ token }: { token: string | null }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if(data.id === undefined) throw new Error(data.detail);
         setMessage('Task created with title: ' + data.title + ' and id: ' + data.id + '.');
         setTitle('');
@@ -32,7 +31,6 @@ function TaskForm({ token }: { token: string | null }) {
         setPoints(0);
       })
       .catch((err) =>{
-        console.log(err);
         setMessage("Error: " + err);
       
       });

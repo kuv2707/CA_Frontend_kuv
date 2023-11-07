@@ -45,9 +45,10 @@ function Login({
   loginTime: Date;
   setLoginTime: Function;
 }) {
-  const [username, setUsername] = useState<string>('fda');
+  const [username, setUsername] = useState<string>('ADMIN');
   const [password, setPassword] = useState<string>('');
   const [lInterval, setLInterval] = useState<number>(0);
+  const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
     //update loginTime
@@ -70,12 +71,19 @@ function Login({
         password,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error('Invalid username or password');
+        return res.json();
+      })
       .then((data) => {
         setToken(data.access);
         setLoginTime(new Date());
+        setMessage('');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setMessage('Error: ' + err.message);
+        setToken(null);
+      });
   }
   return (
     <div className={styles.loginContainer}>
@@ -109,6 +117,9 @@ function Login({
           ? 'Not logged in'
           : `Logged in ${Math.floor(lInterval / 60)} minutes ago`}
       </div>
+        <p style={{
+            color: 'red',
+        }}>{message}</p>
       <button className={styles.button} onClick={handleClick}>
         Login
       </button>

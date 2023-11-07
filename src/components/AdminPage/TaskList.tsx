@@ -20,8 +20,8 @@ function TaskList({ token }: { token: string | null }) {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (!response.ok) throw new Error(response.statusText);
       const data = await response.json();
-      console.log(data);
       if (data.splice === undefined) //there has been an error as data is not an array
       {
         setMessage(data.detail);
@@ -36,7 +36,7 @@ function TaskList({ token }: { token: string | null }) {
         setMessage(data.length+" tasks found.")
       }
     } catch (error) {
-      console.error('Error fetching tasks:', error);
+      setMessage(""+error);
       setTasks([]);
     } finally {
       setLoading(false);
@@ -119,7 +119,6 @@ function TaskItem({
       });
       if (response.ok) handleRefresh();
     } catch (err) {
-      console.log(err);
     }
   }
 
@@ -141,7 +140,6 @@ function TaskItem({
 
       if (response.ok) handleRefresh();
     } catch (error) {
-      console.log(error);
     }
   }
 
