@@ -1,11 +1,26 @@
 .textarea{
     color:black;
 }
-
+.th{
+    border:1px solid black;
+}
 .td{
     padding: 10px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid black;
     text-align: center;
     width: fit-content;
 }
 
+.button {
+    background-color: rgb(89, 23, 16);
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    margin:10px;
+}
+.button:disabled{
+    background-color: rgb(124, 124, 124);
+}

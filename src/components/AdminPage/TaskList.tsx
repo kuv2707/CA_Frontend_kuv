@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './TaskList.module.css';
-import styless from '../../styles/adminPage.module.css';
 type Task = {
   id: number;
   title: string;
@@ -77,14 +76,19 @@ function TaskList({ token }: { token: string | null }) {
               <td colSpan={5}>No tasks found</td>
             </tr>
           )}
-          <p style={{
-            color:"red"
-          }}>{message}</p>
+          <label
+            style={{
+              color: 'red',
+            }}
+          >
+            {message}
+          </label>
         </tbody>
       </table>
-      <button onClick={handleRefresh} className={styless.button}>
+      <button onClick={handleRefresh} className={styles.button}>
         {loading ? 'Loading...' : 'Refresh'}
       </button>
+      
     </div>
   );
 }
@@ -166,7 +170,7 @@ function TaskItem({
       ></input>
       <td className={styles.td}>
         <button
-          className={styless.button}
+          className={styles.button}
           onClick={() => handleUpdateTask()}
           disabled={!edited}
         >
@@ -174,7 +178,7 @@ function TaskItem({
         </button>
       </td>
       <td className={styles.td}>
-        <button className={styless.button} onClick={() => handleDeleteTask()}>
+        <button className={styles.button} onClick={() => handleDeleteTask()}>
           delete
         </button>
       </td>
